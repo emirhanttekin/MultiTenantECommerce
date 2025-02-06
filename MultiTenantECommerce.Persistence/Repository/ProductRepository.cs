@@ -15,7 +15,9 @@ namespace MultiTenantECommerce.Persistence.Repository
 
         public async Task<IEnumerable<Product>> GetProductsByTenantIdAsync(Guid tenantId)
         {
-            return await _context.Products.Where(p => p.TenantID == tenantId).ToListAsync();
+            return await _context.Products
+                .Where(p => p.Id == tenantId)
+                .ToListAsync();
         }
     }
 }

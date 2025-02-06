@@ -5,10 +5,10 @@ namespace MultiTenantECommerce.Application.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductDto>> GetAllProductsAsync(string languageCode = "en");
-        Task<ProductDto> GetProductByIdAsync(Guid id, string languageCode = "en");
-        Task<Product> CreateProductAsync(ProductDto productDto, string languageCode, string description);
-        Task<Product> UpdateProductAsync(Guid id, ProductDto productDto, string languageCode, string description);
-        Task<bool> DeleteProductAsync(Guid id);
+        Task<Product> CreateProductAsync(Guid tenantID, ProductDto productDto);
+        Task<Product> GetProductByIdAsync(Guid productId);
+        Task<IEnumerable<Product>> GetProductsByTenantAsync(Guid tenantId);
+        Task<Product> UpdateProductAsync(Guid productId, ProductDto productDto);
+        Task<bool> DeleteProductAsync(Guid productId);
     }
 }

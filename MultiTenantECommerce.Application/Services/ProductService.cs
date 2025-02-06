@@ -2,79 +2,45 @@
 using MultiTenantECommerce.Application.Interfaces;
 using MultiTenantECommerce.Domain.Entities;
 using MultiTenantECommerce.Domain.Interfaces.Repository;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MultiTenantECommerce.Application.Services
 {
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        private readonly ITranslationRepository _translationRepository;
 
-        public ProductService(IProductRepository productRepository, ITranslationRepository translationRepository)
+        public ProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _translationRepository = translationRepository;
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(string languageCode = "tr")
-        {
-            var products = await _productRepository.GetAllAsync();
-            var productDtos = new List<ProductDto>();
-
-            foreach (var product in products)
-            {
-                var translatedDescription = await _translationRepository.GetTranslationAsync(product.Id, languageCode);
-                productDtos.Add(new ProductDto
-                {
-                    Name = product.Name,
-                    Description = translatedDescription ?? "", 
-                    Price = product.Price,
-                    Stock = product.Stock
-                });
-            }
-            return productDtos;
-        }
-
-        public async Task<ProductDto> GetProductByIdAsync(Guid id, string languageCode = "tr")
-        {
-            var product = await _productRepository.GetByIdAsync(id);
-            if (product == null) return null;
-
-            var translatedDescription = await _translationRepository.GetTranslationAsync(id, languageCode);
-
-            return new ProductDto
-            {
-                Name = product.Name,
-                Description = translatedDescription ?? "",
-                Price = product.Price,
-                Stock = product.Stock
-            };
-        }
-
-        public async Task<Product> CreateProductAsync(ProductDto productDto, string languageCode, string description)
+        public async Task<Product> CreateProductAsync(Guid tenantID, ProductDto productDto)
         {
             var product = new Product
             {
-                Id = Guid.NewGuid(), 
+                TenantID = tenantID,
                 Name = productDto.Name,
                 Price = productDto.Price,
                 Stock = productDto.Stock
             };
 
             await _productRepository.AddAsync(product);
-
-          
-            await _translationRepository.AddOrUpdateTranslationAsync(product.Id, languageCode, description);
-
             return product;
         }
 
-        public async Task<Product> UpdateProductAsync(Guid id, ProductDto productDto, string languageCode, string description)
+        public async Task<Product> GetProductByIdAsync(Guid productId)
         {
-            var product = await _productRepository.GetByIdAsync(id);
+            return await _productRepository.GetByIdAsync(productId);
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByTenantAsync(Guid tenantId)
+        {
+            return await _productRepository.GetProductsByTenantIdAsync(tenantId);
+        }
+
+        public async Task<Product> UpdateProductAsync(Guid productId, ProductDto productDto)
+        {
+            var product = await _productRepository.GetByIdAsync(productId);
             if (product == null) return null;
 
             product.Name = productDto.Name;
@@ -82,21 +48,15 @@ namespace MultiTenantECommerce.Application.Services
             product.Stock = productDto.Stock;
 
             await _productRepository.UpdateAsync(product);
-
-            await _translationRepository.AddOrUpdateTranslationAsync(product.Id, languageCode, description);
-
             return product;
         }
 
-        public async Task<bool> DeleteProductAsync(Guid id)
+        public async Task<bool> DeleteProductAsync(Guid productId)
         {
-            var product = await _productRepository.GetByIdAsync(id);
+            var product = await _productRepository.GetByIdAsync(productId);
             if (product == null) return false;
 
-            await _productRepository.DeleteAsync(id);
-
-            await _translationRepository.DeleteTranslationAsync(id, "tr"); 
-
+            await _productRepository.DeleteAsync(productId);
             return true;
         }
     }
