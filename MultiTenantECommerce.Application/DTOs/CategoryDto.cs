@@ -1,8 +1,8 @@
 ﻿namespace MultiTenantECommerce.Application.DTOs
 {
-    public class TenantDto
+    public class CategoryDto
     {
         public string Name { get; set; }
-        public string Domain { get; set; }
+        public Guid? ParentCategoryID { get; set; }  
     }
 }

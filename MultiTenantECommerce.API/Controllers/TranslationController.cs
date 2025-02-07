@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiTenantECommerce.Application.DTOs;
 using MultiTenantECommerce.Application.Interfaces;
-using MultiTenantECommerce.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MultiTenantECommerce.API.Controllers
 {

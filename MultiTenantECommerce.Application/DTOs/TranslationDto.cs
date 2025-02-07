@@ -4,8 +4,8 @@
     {
 
         public Guid ProductId { get; set; }  
-        public string LanguageCode { get; set; } // "en", "tr", "de" gibi dil kodları
-        public string TranslatedText { get; set; } // Çeviri metni
+        public string LanguageCode { get; set; } 
+        public string TranslatedText { get; set; } 
 
         public string EntityType { get; set; }
 

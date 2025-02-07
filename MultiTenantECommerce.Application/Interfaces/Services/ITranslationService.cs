@@ -1,8 +1,5 @@
 ﻿using MultiTenantECommerce.Application.DTOs;
 using MultiTenantECommerce.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MultiTenantECommerce.Application.Interfaces
 {

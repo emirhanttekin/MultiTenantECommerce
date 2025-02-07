@@ -2,9 +2,6 @@
 using MultiTenantECommerce.Application.Interfaces;
 using MultiTenantECommerce.Domain.Entities;
 using MultiTenantECommerce.Domain.Interfaces.Repository;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MultiTenantECommerce.Application.Services
 {
@@ -23,7 +20,7 @@ namespace MultiTenantECommerce.Application.Services
             {
                 TenantID = tenantId,
                 ProductId = translationDto.ProductId,
-                EntityType = "Product",
+                EntityType = translationDto.EntityType,
                 LanguageCode = translationDto.LanguageCode,
                 FieldName = translationDto.FieldName,
                 TranslatedText = translationDto.TranslatedText

@@ -1,7 +1,4 @@
 ﻿using MultiTenantECommerce.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MultiTenantECommerce.Domain.Interfaces.Repository
 {

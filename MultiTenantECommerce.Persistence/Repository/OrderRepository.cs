@@ -13,10 +13,33 @@ namespace MultiTenantECommerce.Persistence.Repository
         {
             _context = context;
         }
-
         public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(Guid userId)
         {
-            return await _context.Orders.Where(o => o.UserID == userId).ToListAsync();
+            return await _context.Orders 
+                .Where(o => o.UserID == userId)
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .ToListAsync();
         }
+
+        public async Task<Order> GetOrderByIdWithItemsAsync(Guid orderId)
+        {
+            return await _context.Orders
+                .Include(o => o.OrderItems)  
+                .FirstOrDefaultAsync(o => o.Id == orderId);
+        }
+
+        public async Task<IEnumerable<Order>> GetOrderByTenantIdAsync(Guid tenantId)
+        {
+            return await _context.Orders
+                 .Where(o => o.TenantID == tenantId)
+                 .Include(o => o.OrderItems)
+                 .ThenInclude(oi => oi.Product)
+                 .ToListAsync();
+        }
+
+
+
+
     }
 }

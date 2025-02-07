@@ -12,7 +12,7 @@ using MultiTenantECommerce.Persistence.Context;
 namespace MultiTenantECommerce.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250206144051_InitialCreate")]
+    [Migration("20250207065005_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

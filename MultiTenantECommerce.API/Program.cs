@@ -1,8 +1,10 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MultiTenantECommerce.Application.Interfaces;
+using MultiTenantECommerce.Application.Interfaces.Services;
 using MultiTenantECommerce.Application.Services;
 using MultiTenantECommerce.Domain.Interfaces.Repository;
 using MultiTenantECommerce.Persistence.Context;
+using MultiTenantECommerce.Persistence.Repositories;
 using MultiTenantECommerce.Persistence.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +30,18 @@ builder.Services.AddScoped<ITenantService, TenantService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ITranslationService, TranslationService>();
 builder.Services.AddScoped<ITranslationRepository, TranslationRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+builder.Services.AddScoped<IProductCategoryService ,ProductCategoryService>();
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+
+// ✅ Order & OrderItem için Service Bağımlılıklarını Ekle
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository , OrderRepository>();
+builder.Services.AddScoped<IOrderItemRepository , OrderItemRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
