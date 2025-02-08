@@ -4,6 +4,6 @@ namespace MultiTenantECommerce.Domain.Interfaces.Repository
 {
     public interface IUserRepository  : IGenericRepository<User>
     {
-        Task<User> GetUserByEmailAsync(string email);
+        Task<User> GetByEmailAsync(string email);
     }
 }

@@ -7,10 +7,11 @@ namespace MultiTenantECommerce.Persistence.Repository
 {
     public class ProductImageRepository : GenericRepository<ProductImage>, IProductImageRepository
     {
-        private readonly  DataContext _context;
+        private readonly DataContext _context;
+
         public ProductImageRepository(DataContext context) : base(context)
         {
-            _context  = context;
+            _context = context;
         }
 
         public async Task<IEnumerable<ProductImage>> GetImagesByProductIdAsync(Guid productId)
@@ -18,6 +19,13 @@ namespace MultiTenantECommerce.Persistence.Repository
             return await _context.ProductImages
                 .Where(pi => pi.ProductID == productId)
                 .ToListAsync();
+        }
+
+        public async Task<ProductImage> GetMainImageByProductIdAsync(Guid productId)
+        {
+            return await _context.ProductImages
+                .Where(pi => pi.ProductID == productId && pi.IsMain)
+                .FirstOrDefaultAsync();
         }
     }
 }

@@ -2,8 +2,9 @@
 
 namespace MultiTenantECommerce.Domain.Interfaces.Repository
 {
-    public interface IProductImageRepository :IGenericRepository<ProductImage>
+    public interface IProductImageRepository : IGenericRepository<ProductImage>
     {
         Task<IEnumerable<ProductImage>> GetImagesByProductIdAsync(Guid productId);
+        Task<ProductImage> GetMainImageByProductIdAsync(Guid productId);
     }
 }
