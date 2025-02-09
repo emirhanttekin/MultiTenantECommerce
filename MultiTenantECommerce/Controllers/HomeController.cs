@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MultiTenantECommerce.Models;
 
-namespace MultiTenantECommerce.Controllers
+
+namespace LuvCeramicArt.Shop.Controllers
 {
     public class HomeController : Controller
     {

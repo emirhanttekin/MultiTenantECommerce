@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTenantECommerce", "MultiTenantECommerce\MultiTenantECommerce.csproj", "{83667F07-7658-45D2-A3F6-0FF619A8FF7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuvCeramicArt.Shop", "MultiTenantECommerce\LuvCeramicArt.Shop.csproj", "{83667F07-7658-45D2-A3F6-0FF619A8FF7C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{834A8B17-0DD2-4E5A-9DD2-6A8813EB49CA}"
 EndProject

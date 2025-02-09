@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiTenantECommerce.Application.DTOs;
 using MultiTenantECommerce.Application.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace MultiTenantECommerce.API.Controllers
 {
@@ -16,54 +18,33 @@ namespace MultiTenantECommerce.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTranslation(
-            [FromQuery] Guid tenantID,
- 
-             [FromBody] TranslationDto translationDto)
+        public async Task<IActionResult> CreateTranslation([FromQuery] Guid tenantId, [FromBody] TranslationDto translationDto)
         {
-            var newTranslation = await _translationService.CrateTranslationAsync(tenantID , translationDto);
-            return CreatedAtAction(nameof(GetTranslationById), new { id = newTranslation.Id }, newTranslation);
+            var translation = await _translationService.CreateTranslationAsync(tenantId, translationDto);
+            return CreatedAtAction(nameof(GetTranslationById), new { id = translation.Id }, translation);
         }
 
         [HttpGet("{id:guid}")]
-        
-        public async Task<IActionResult>GetTranslationById(Guid id)
+        public async Task<IActionResult> GetTranslationById(Guid id)
         {
             var translation = await _translationService.GetTranslationByIdAsync(id);
             if (translation == null) return NotFound();
-            return Ok(translation);
-        }
-        [HttpGet("tenant/{tenantId:Guid}")]
-        public async Task<IActionResult> GetTranslationByTenant(Guid tenantId)
-        {
-            var translation = await _translationService.GetTranslationByTenantAsync(tenantId);
-            if (translation == null) return NotFound();
+            
             return Ok(translation);
         }
 
-        [HttpGet("product/{productId:Guid}")]
-        public async Task<IActionResult> GetTranslationByProduct(Guid productId)
+        [HttpGet("entity/{entityId:guid}/{entityType}")]
+        public async Task<IActionResult> GetTranslationsByEntity(Guid tenantId,Guid entityId, string entityType)
         {
-            var translation = await _translationService.GetTranslationByProductAsync(productId);
-            if (translation == null) return NotFound();
-            return Ok(translation);
-        }
-
-
-        [HttpPut("{id:guid}")]
-        public async Task<IActionResult> UpdateTranslation(Guid id, [FromBody] TranslationDto translationDto)
-        {
-            var updateTranslation = await _translationService.UpdateTranslationAsync(id, translationDto);
-            if (updateTranslation == null) return NotFound();
-            return Ok(updateTranslation);
+            var translations = await _translationService.GetTranslationsByEntityAsync(tenantId,entityId, entityType);
+            return Ok(translations);
         }
 
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteTranslation(Guid id)
         {
             var result = await _translationService.DeleteTranslationAsync(id);
-            if (!result) return NotFound();
-            return NoContent();
+            return result ? Ok() : NotFound();
         }
     }
 }

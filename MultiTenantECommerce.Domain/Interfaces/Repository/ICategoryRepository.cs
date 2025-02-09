@@ -1,4 +1,6 @@
-﻿namespace MultiTenantECommerce.Domain.Interfaces.Repository
+﻿using MultiTenantECommerce.Domain.Entities;
+
+namespace MultiTenantECommerce.Domain.Interfaces.Repository
 {
     public interface ICategoryRepository : IGenericRepository<Category>
     {

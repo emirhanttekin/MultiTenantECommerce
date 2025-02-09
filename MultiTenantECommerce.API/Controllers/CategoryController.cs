@@ -25,23 +25,24 @@ namespace MultiTenantECommerce.API.Controllers
             return CreatedAtAction(nameof(GetCategoryById), new { id = newCategory.Id }, newCategory);
         }
 
-        [HttpGet("tenant/{tenantId:guid}")]
-        public async Task<IActionResult> GetCategoriesByTenantId(Guid tenantId)
+        [HttpGet("tenant/{tenantId:guid}/{languageCode}")]
+        public async Task<IActionResult> GetCategoriesByTenantId(Guid tenantId, string languageCode)
         {
-            var categories = await _categoryService.GetCategoriesByTenantIdAsync(tenantId);
+            var categories = await _categoryService.GetCategoriesByTenantIdAsync(tenantId, languageCode);
             return Ok(categories);
         }
 
+
         [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetCategoryById(Guid id)
+        public async Task<IActionResult> GetCategoryById(Guid categoryId, string languageCode)
         {
-            var category = await _categoryService.GetCategoryByIdAsync(id);
+            var category = await _categoryService.GetCategoryByIdAsync(categoryId, languageCode);
             if (category == null) return NotFound();
             return Ok(category);
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> UpdateCategory(Guid id, [FromBody] CategoryDto categoryDto)
+        public async Task<IActionResult> UpdateCategory(Guid id, [FromBody] UpdateCategoryDto categoryDto)
         {
             var updatedCategory = await _categoryService.UpdateCategoryAsync(id, categoryDto);
             if (updatedCategory == null) return NotFound();
@@ -57,9 +58,9 @@ namespace MultiTenantECommerce.API.Controllers
         }
 
         [HttpGet("subcategories/{parentCategoryId:guid}")]
-        public async Task<IActionResult> GetSubCategories(Guid parentCategoryId)
+        public async Task<IActionResult> GetSubCategories(Guid parentCategoryId, string languageCode)
         {
-            var subCategories = await _categoryService.GetSubCategoriesAsync(parentCategoryId);
+            var subCategories = await _categoryService.GetSubCategoriesAsync(parentCategoryId , languageCode);
             return Ok(subCategories);
         }
     }

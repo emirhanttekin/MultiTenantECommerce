@@ -19,7 +19,7 @@ namespace MultiTenantECommerce.Application.Services
             var product = new Product
             {
                 TenantID = tenantID,
-                Name = productDto.Name,
+      
                 Price = productDto.Price,
                 Stock = productDto.Stock
             };
@@ -43,7 +43,7 @@ namespace MultiTenantECommerce.Application.Services
             var product = await _productRepository.GetByIdAsync(productId);
             if (product == null) return null;
 
-            product.Name = productDto.Name;
+            
             product.Price = productDto.Price;
             product.Stock = productDto.Stock;
 

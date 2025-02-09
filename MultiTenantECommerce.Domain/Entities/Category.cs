@@ -1,13 +1,13 @@
 ﻿using MultiTenantECommerce.Domain.Common;
 
-public class Category : BaseEntity
+namespace MultiTenantECommerce.Domain.Entities
 {
-    public Guid TenantID { get; set; }
-    public string Name { get; set; }
-
-    public Guid? ParentCategoryID { get; set; }  
-
-    public Category ParentCategory { get; set; }
-    public ICollection<Category> SubCategories { get; set; }
-    public ICollection<ProductCategory> ProductCategories { get; set; }
+    public class Category : BaseEntity
+    {
+        public Guid TenantID { get; set; }
+        public Guid? ParentCategoryID { get; set; }  // Ana kategori varsa
+        public Category ParentCategory { get; set; } // Parent ile ilişki
+        public ICollection<Category> SubCategories { get; set; } // Alt kategoriler
+        public ICollection<ProductCategory> ProductCategories { get; set; } // Ürün ilişkisi
+    }
 }

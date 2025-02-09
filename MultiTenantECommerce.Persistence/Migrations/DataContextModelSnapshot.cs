@@ -22,7 +22,7 @@ namespace MultiTenantECommerce.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Category", b =>
+            modelBuilder.Entity("MultiTenantECommerce.Domain.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,10 +30,6 @@ namespace MultiTenantECommerce.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ParentCategoryID")
                         .IsRequired()
@@ -120,10 +116,6 @@ namespace MultiTenantECommerce.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -225,6 +217,9 @@ namespace MultiTenantECommerce.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("EntityType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -237,9 +232,6 @@ namespace MultiTenantECommerce.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("TenantID")
                         .HasColumnType("uniqueidentifier");
 
@@ -248,8 +240,6 @@ namespace MultiTenantECommerce.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.HasIndex("TenantID");
 
@@ -306,9 +296,9 @@ namespace MultiTenantECommerce.Persistence.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("Category", b =>
+            modelBuilder.Entity("MultiTenantECommerce.Domain.Entities.Category", b =>
                 {
-                    b.HasOne("Category", "ParentCategory")
+                    b.HasOne("MultiTenantECommerce.Domain.Entities.Category", "ParentCategory")
                         .WithMany("SubCategories")
                         .HasForeignKey("ParentCategoryID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -396,19 +386,11 @@ namespace MultiTenantECommerce.Persistence.Migrations
 
             modelBuilder.Entity("MultiTenantECommerce.Domain.Entities.Translation", b =>
                 {
-                    b.HasOne("MultiTenantECommerce.Domain.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MultiTenantECommerce.Domain.Entities.Tenant", "Tenant")
                         .WithMany()
                         .HasForeignKey("TenantID")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Product");
 
                     b.Navigation("Tenant");
                 });
@@ -426,7 +408,7 @@ namespace MultiTenantECommerce.Persistence.Migrations
 
             modelBuilder.Entity("ProductCategory", b =>
                 {
-                    b.HasOne("Category", "Category")
+                    b.HasOne("MultiTenantECommerce.Domain.Entities.Category", "Category")
                         .WithMany("ProductCategories")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -443,7 +425,7 @@ namespace MultiTenantECommerce.Persistence.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Category", b =>
+            modelBuilder.Entity("MultiTenantECommerce.Domain.Entities.Category", b =>
                 {
                     b.Navigation("ProductCategories");
 

@@ -4,8 +4,7 @@ namespace MultiTenantECommerce.Domain.Interfaces.Repository
 {
     public interface ITranslationRepository : IGenericRepository<Translation>
     {
-        Task<IEnumerable<Translation>> GetTranslationByTenantIdAsync(Guid tenantId);
-
-        Task<IEnumerable<Translation>> GetTranslationByProductIdAsync(Guid productId);
+        Task<Translation> GetTranslationAsync(Guid tenantId, Guid entityId, string entityType, string fieldName, string languageCode);
+        Task<IEnumerable<Translation>> GetTranslationsByEntityAsync(Guid tenantId, Guid entityId, string entityType);
     }
 }

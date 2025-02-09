@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\.vs\ProjectSettings.json" />
+    <Content Include="wwwroot\.vs\VSWorkspaceState.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\.vs\assets\FileContentIndex\155108cd-9868-4db0-b399-aabe8b3bfc8c.vsidx" />
+    <None Include="wwwroot\.vs\assets\FileContentIndex\3d319422-d1b5-46a9-b9db-5e1fce1aaf90.vsidx" />
+    <None Include="wwwroot\.vs\assets\FileContentIndex\8a520632-67f1-45b1-8d79-d38c46328a7d.vsidx" />
+    <None Include="wwwroot\.vs\assets\FileContentIndex\read.lock" />
+    <None Include="wwwroot\.vs\assets\v17\workspaceFileList.bin" />
+    <None Include="wwwroot\.vs\slnx.sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\.vs\assets\FileContentIndex\merges\" />
+    <Folder Include="wwwroot\vendor\sticky\New folder\" />
+  </ItemGroup>
+
+</Project>
