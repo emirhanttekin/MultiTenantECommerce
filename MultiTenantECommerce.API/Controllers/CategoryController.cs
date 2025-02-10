@@ -29,6 +29,10 @@ namespace MultiTenantECommerce.API.Controllers
         public async Task<IActionResult> GetCategoriesByTenantId(Guid tenantId, string languageCode)
         {
             var categories = await _categoryService.GetCategoriesByTenantIdAsync(tenantId, languageCode);
+
+            if (categories == null || !categories.Any())
+                return NoContent(); 
+
             return Ok(categories);
         }
 

@@ -27,30 +27,14 @@
         })(document);
     </script>
 
-    <link rel="preload" href="~/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" as="font" type="font/woff2"
-          crossorigin="anonymous">
-    <link rel="preload" href="~/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" as="font" type="font/woff2"
-          crossorigin="anonymous">
-    <link rel="preload" href="~/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" as="font" type="font/woff2"
-          crossorigin="anonymous">
-    <link rel="preload" href="~/fonts/wolmart.woff?png09e" as="font" type="font/woff" crossorigin="anonymous">
-
-    <!-- Vendor CSS -->
-    <link rel="stylesheet" type="text/css" href="~/vendor/fontawesome-free/css/all.min.css">
-
-    <!-- Plugins CSS -->
-    <link rel="stylesheet" href="~/vendor/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/magnific-popup/magnific-popup.min.css">
-
-    <!-- Default CSS -->
-    <link rel="stylesheet" type="text/css" href="~/css/demo10.min.css">
-
+    <partial name="_LayoutCssPartial"></partial>
 </head>
 
 <body class="home">
+    <partial name="Header/_HeaderPartial" />
     @RenderBody();
- 
+
+ <partial name="Footer/_FooterPartial"/>
     <div class="product product-single product-popup">
         <div class="row gutter-lg">
             <div class="col-md-6 mb-4 mb-md-0">
@@ -213,16 +197,5 @@
     </div>
     <!-- End of Quick view -->
     <!-- Plugin JS File -->
-    <script src="~/vendor/jquery/jquery.min.js"></script>
-    <script src="~/vendor/floating-parallax/parallax.min.js"></script>
-    <script src="~/vendor/jquery.plugin/jquery.plugin.min.js"></script>
-    <script src="~/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="~/vendor/isotope/isotope.pkgd.min.js"></script>
-    <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="~/vendor/jquery.countdown/jquery.countdown.min.js"></script>
-    <script src="~/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="~/vendor/zoom/jquery.zoom.js"></script>
-
-    <!-- Main JS -->
-    <script src="~/js/main.min.js"></script>
+    <partial name="_LayoutJsPartial"></partial>
 </body>

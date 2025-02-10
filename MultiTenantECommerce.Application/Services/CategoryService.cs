@@ -19,25 +19,32 @@ namespace MultiTenantECommerce.Application.Services
             _categoryRepository = categoryRepository;
             _translationRepository = translationRepository;
         }
-
         public async Task<IEnumerable<CategoryResponseDto>> GetCategoriesByTenantIdAsync(Guid tenantId, string languageCode)
         {
             var categories = await _categoryRepository.GetCategoriesByTenantIdAsync(tenantId);
+
+            if (categories == null || !categories.Any())
+                return new List<CategoryResponseDto>();
+
             var categoryDtos = new List<CategoryResponseDto>();
 
             foreach (var category in categories)
             {
+                // ✅ Ana kategorileri (ParentCategoryID NULL olanları) da dahil etmeliyiz!
                 var translatedName = await GetTranslatedTextAsync(category.TenantID, category.Id, "Category", "Name", languageCode);
+
                 categoryDtos.Add(new CategoryResponseDto
                 {
                     Id = category.Id,
                     Name = translatedName ?? "No Translation",
-                    ParentCategoryID = category.ParentCategoryID,
+                    ParentCategoryID = category.ParentCategoryID
                 });
             }
 
             return categoryDtos;
         }
+
+
 
         public async Task<CategoryResponseDto> GetCategoryByIdAsync(Guid categoryId, string languageCode)
         {

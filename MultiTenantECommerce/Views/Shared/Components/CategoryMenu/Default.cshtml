@@ -1,0 +1,66 @@
+﻿@model List<MultiTenantECommerce.Application.DTOs.CategoryResponseDto>
+
+
+@foreach (var category in Model.Where(c => c.ParentCategoryID == null)) {
+    <li>
+        <a href="shop-fullwidth-banner.html">
+            <i class="w-icon-tshirt2"></i>@category.Name
+        </a>
+        <ul class="megamenu">
+            <li>
+                <h4 class="menu-title">@category.Name</h4>
+                <hr class="divider">
+                <ul>
+                    @if (Model.Any(c => c.ParentCategoryID == category.Id)) 
+                    {
+
+                        @foreach (var subCategory in Model.Where(c => c.ParentCategoryID == category.Id)) 
+                        {
+                            <li><a href="#">@subCategory.Name</a></li>
+                        }
+                       
+                    }
+                 
+
+                </ul>
+            </li>
+     
+            <li>
+                <div class="banner-fixed menu-banner menu-banner2">
+                    <figure>
+                        <img src="~/images/menu/banner-2.jpg" alt="Menu Banner"
+                             width="235" height="347" />
+                    </figure>
+                    <div class="banner-content">
+                        <div class="banner-price-info mb-1 ls-normal">
+                            Get up to
+                            <strong class="text-primary text-uppercase">20%Off</strong>
+                        </div>
+                        <h3 class="banner-title ls-normal">Hot Sales</h3>
+                        <a href="shop-banner-sidebar.html"
+                           class="btn btn-dark btn-sm btn-link btn-slide-right btn-icon-right">
+                            Shop Now<i class="w-icon-long-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+}
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+

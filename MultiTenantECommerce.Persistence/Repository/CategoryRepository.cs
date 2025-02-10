@@ -18,8 +18,16 @@ namespace MultiTenantECommerce.Persistence.Repository
         {
             return await _context.Categories
                 .Where(c => c.TenantID == tenantId)
+                .Select(c => new Category
+                {
+                    Id = c.Id,
+                    TenantID = c.TenantID,
+                    ParentCategoryID = c.ParentCategoryID.HasValue ? c.ParentCategoryID.Value : (Guid?)null // ✅ NULL Kontrolü
+                })
                 .ToListAsync();
         }
+
+
 
         public async Task<Category> GetCategoryByIdAsync(Guid categoryId)
         {

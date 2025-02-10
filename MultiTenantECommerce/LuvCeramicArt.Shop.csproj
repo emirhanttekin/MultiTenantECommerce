@@ -25,4 +25,8 @@
     <Folder Include="wwwroot\vendor\sticky\New folder\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MultiTenantECommerce.Application\MultiTenantECommerce.Application.csproj" />
+  </ItemGroup>
+
 </Project>
