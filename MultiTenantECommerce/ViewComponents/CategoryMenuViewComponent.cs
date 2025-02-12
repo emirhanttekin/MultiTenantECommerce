@@ -18,17 +18,24 @@ namespace LuvCeramicArt.Shop.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var categories = await GetCategoriesFromApi();
+            var languageCode = GetLanguageFromCookie();
+            var categories = await GetCategoriesFromApi(languageCode);
 
             if (categories == null || !categories.Any())
-                return View(new List<CategoryResponseDto>()); 
+                return View(new List<CategoryResponseDto>());
 
             return View(categories);
         }
 
-        private async Task<List<CategoryResponseDto>> GetCategoriesFromApi()
+        private string GetLanguageFromCookie()
+        
         {
-            var languageCode = "tr"; // Kullanıcı dili
+            var cookieValue = HttpContext.Request.Cookies["selectedLanguage"];
+            return !string.IsNullOrEmpty(cookieValue) ? cookieValue : "tr"; 
+        }
+
+        private async Task<List<CategoryResponseDto>> GetCategoriesFromApi(string languageCode)
+        {
             var requestUrl = $"https://localhost:7030/api/Category/tenant/{_tenantConfig.TenantId}/{languageCode}";
 
             var response = await _httpClient.GetAsync(requestUrl);
@@ -36,9 +43,7 @@ namespace LuvCeramicArt.Shop.Components
                 return new List<CategoryResponseDto>();
 
             var json = await response.Content.ReadAsStringAsync();
-            var categories = JsonSerializer.Deserialize<List<CategoryResponseDto>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<CategoryResponseDto>();
-
-            return categories;
+            return JsonSerializer.Deserialize<List<CategoryResponseDto>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<CategoryResponseDto>();
         }
     }
 }

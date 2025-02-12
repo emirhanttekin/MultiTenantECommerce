@@ -15,24 +15,53 @@
                 <!-- End of DropDown Menu -->
 
                 <div class="dropdown">
-                    <a href="#language">
-                        <img src="~/images/flags/eng.png" alt="ENG Flag" width="14"
-                             height="8" class="dropdown-image" /> ENG
+                    <a href="#" id="selectedLanguage">
+                        <img id="selectedFlag" src="~/images/flags/tr.png" alt="TR Flag" width="14" height="8" class="dropdown-image" />
+                        <span id="selectedLangText">TR</span>
                     </a>
 
+
                     <div class="dropdown-box">
-                        <a href="#ENG">
-                            <img src="~/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
-                                 class="dropdown-image" />
+                        <a href="#" onclick="changeLanguage('en')">
+                            <img src="~/images/flags/eng.png" alt="ENG Flag" width="14" height="8" class="dropdown-image" />
                             ENG
                         </a>
-                        <a href="#TR">
-                            <img src="~/images/flags/tr.png" alt="TR Flag" width="14" height="8"
-                                 class="dropdown-image" />
+                        <a href="#" onclick="changeLanguage('tr')">
+                            <img src="~/images/flags/tr.png" alt="TR Flag" width="14" height="8" class="dropdown-image" />
                             TR
                         </a>
-                      
                     </div>
+
+                    <script>
+                        function changeLanguage(lang) {
+                            document.cookie = "selectedLanguage=" + lang + "; path=/; expires=" + new Date(new Date().getTime() + 365*24*60*60*1000).toUTCString();
+                            location.reload(); // Sayfayı yenileyerek yeni dili uygula
+                        }
+
+                        function getLanguageFromCookie() {
+                            let cookies = document.cookie.split('; ');
+                            for (let i = 0; i < cookies.length; i++) {
+                                let parts = cookies[i].split('=');
+                                if (parts[0] === "selectedLanguage") {
+                                    return parts[1];
+                                }
+                            }
+                            return "tr"; // Varsayılan dil Türkçe
+                        }
+
+                        function updateLanguageUI() {
+                            let lang = getLanguageFromCookie();
+                            let flagSrc = lang === "en" ? "/images/flags/eng.png" : "/images/flags/tr.png";
+                            let langText = lang === "en" ? "ENG" : "TR";
+
+                            document.getElementById("selectedFlag").src = flagSrc;
+                            document.getElementById("selectedLangText").innerText = langText;
+                        }
+
+                        updateLanguageUI();
+                    </script>
+
+
                 </div>
                 <!-- End of Dropdown Menu -->
                 <span class="divider d-lg-show"></span>

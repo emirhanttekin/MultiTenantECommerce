@@ -1,4 +1,7 @@
 ﻿{
+  "dotnetRunMessages": true,
+  "hotReloadEnabled": true,
+
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,

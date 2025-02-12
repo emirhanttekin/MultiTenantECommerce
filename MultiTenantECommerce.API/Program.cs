@@ -49,7 +49,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository , OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository , OrderItemRepository>();
 var app = builder.Build();
-
+app.UseMiddleware<MultiTenantECommerce.API.Middleware.LanguageMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

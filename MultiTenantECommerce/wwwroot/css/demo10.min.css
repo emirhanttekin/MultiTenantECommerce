@@ -13646,7 +13646,7 @@ aside .sp-sidebar-banner span {
         }
 
 .category-dropdown > a {
-    background: #42a4e8;
+    background: #83664f;
     min-width: 28rem;
     padding: 1.9rem 2rem 1.8rem 2.2rem;
     letter-spacing: -0.015em;
@@ -13678,7 +13678,7 @@ aside .sp-sidebar-banner span {
 
 .category-dropdown.show > a, .category-dropdown:hover > a {
     color: #fff;
-    background-color: #42a4e8
+    background-color: #df6a0d
 }
 
 .category-dropdown .dropdown-box {
@@ -15045,7 +15045,7 @@ aside .sp-sidebar-banner span {
 }
 
 .intro-slide {
-    min-height: 80rem
+    min-height: 60rem
 }
 
     .intro-slide .btn {
