@@ -1,8 +1,14 @@
-﻿<header class="header has-center">
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizerFactory LocalizerFactory
+@{
+    var Localizer = LocalizerFactory.Create("SharedResource", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+}
+
+<header class="header has-center">
     <div class="header-top">
         <div class="container">
             <div class="header-left">
-                <p class="welcome-msg">Welcome to Wolmart Store message or remove it!</p>
+                <p class="welcome-msg">@Localizer["WelcomeMessage"]</p>
             </div>
             <div class="header-right">
                 <div class="dropdown">
@@ -22,11 +28,11 @@
 
 
                     <div class="dropdown-box">
-                        <a href="#" onclick="changeLanguage('en')">
+                        <a href="@Url.Action("ChangeLanguage", "Language", new { culture = "en" })" onclick="changeLanguage('en')">
                             <img src="~/images/flags/eng.png" alt="ENG Flag" width="14" height="8" class="dropdown-image" />
                             ENG
                         </a>
-                        <a href="#" onclick="changeLanguage('tr')">
+                        <a href="@Url.Action("ChangeLanguage", "Language", new { culture = "tr" })" onclick="changeLanguage('tr')">
                             <img src="~/images/flags/tr.png" alt="TR Flag" width="14" height="8" class="dropdown-image" />
                             TR
                         </a>
@@ -35,7 +41,7 @@
                     <script>
                         function changeLanguage(lang) {
                             document.cookie = "selectedLanguage=" + lang + "; path=/; expires=" + new Date(new Date().getTime() + 365*24*60*60*1000).toUTCString();
-                            location.reload(); // Sayfayı yenileyerek yeni dili uygula
+                            location.reload(); 
                         }
 
                         function getLanguageFromCookie() {
@@ -46,7 +52,7 @@
                                     return parts[1];
                                 }
                             }
-                            return "tr"; // Varsayılan dil Türkçe
+                            return "tr";
                         }
 
                         function updateLanguageUI() {
@@ -65,7 +71,7 @@
                 </div>
                 <!-- End of Dropdown Menu -->
                 <span class="divider d-lg-show"></span>
-                <a href="blog.html" class="d-lg-show">Blog</a>
+                <a href="blog.html" class="d-lg-show">@Localizer["Blog"]</a>
                 <a href="contact-us.html" class="d-lg-show">Contact Us</a>
                 <a href="my-account.html" class="d-lg-show">My Account</a>
                 <a href="~/ajax/login.html" class="d-lg-show login sign-in">
@@ -87,7 +93,7 @@
                     <input type="text" class="form-control" name="search" id="search"
                            placeholder="Search..." required />
                     <button class="btn btn-search" type="submit">
-                        <i class="w-icon-search"></i>
+                        <i class="w-icon-search"></i>   
                     </button>
                 </form>
             </div>
@@ -205,9 +211,9 @@
                     <div class="dropdown category-dropdown" data-visible="true">
                         <a href="#" class="category-toggle text-white" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="true" data-display="static"
-                           title="Kategoriler">
+                           title="@Localizer["Categories"]">
                             <i class="w-icon-category"></i>
-                            <span>Kategoriler</span>
+                            <span>@Localizer["Categories"]</span>
                         </a>
 
                         <div class="dropdown-box text-default">
@@ -219,15 +225,15 @@
                     <nav class="main-nav ml-4">
                         <ul class="menu active-underline">
                             <li class="active">
-                                <a href="demo10.html">Home</a>
+                                <a href="demo10.html">@Localizer["Home"]</a>
                             </li>
                             <li>
-                                <a href="shop-banner-sidebar.html">Shop</a>
+                                <a href="shop-banner-sidebar.html">@Localizer["Shop"]</a>
 
                                 <!-- Start of Megamenu -->
                                 <ul class="megamenu">
                                     <li>
-                                        <h4 class="menu-title">Shop Pages</h4>
+                                        <h4 class="menu-title">@Localizer["Pages"]</h4>
                                         <ul>
                                             <li><a href="shop-banner-sidebar.html">Banner With Sidebar</a></li>
                                             <li><a href="shop-boxed-banner.html">Boxed Banner</a></li>
@@ -302,7 +308,7 @@
                                 <!-- End of Megamenu -->
                             </li>
                             <li>
-                                <a href="vendor-dokan-store.html">Vendor</a>
+                                <a href="vendor-dokan-store.html">@Localizer["Vendor"]</a>
                                 <ul>
                                     <li>
                                         <a href="vendor-dokan-store-list.html">Store Listing</a>
@@ -366,7 +372,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="about-us.html">Pages</a>
+                                <a href="about-us.html">@Localizer["Pages"]</a>
                                 <ul>
 
                                     <li><a href="about-us.html">About Us</a></li>
@@ -383,7 +389,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="elements.html">Elements</a>
+                                <a href="elements.html">@Localizer["Elements"]</a>
                                 <ul>
                                     <li><a href="element-accordions.html">Accordions</a></li>
                                     <li><a href="element-alerts.html">Alert &amp; Notification</a></li>
@@ -407,8 +413,8 @@
                     </nav>
                 </div>
                 <div class="header-right">
-                    <a href="#" class="d-xl-show"><i class="w-icon-map-marker mr-1"></i>Track Order</a>
-                    <a href="#"><i class="w-icon-sale"></i>Daily Deals</a>
+                    <a href="#" class="d-xl-show"><i class="w-icon-map-marker mr-1"></i>@Localizer["TrackOrder"]</a>
+                    <a href="#"><i class="w-icon-sale"></i>@Localizer["DailyDeals"]</a>
                 </div>
             </div>
         </div>

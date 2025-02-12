@@ -1,6 +1,28 @@
+using Microsoft.AspNetCore.Localization;
 using MultiTenantECommerce.Application.Config;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+// **View Localization Servisini Aktif Et**
+builder.Services.AddMvc().AddViewLocalization();
+
+var supportedCultures = new[]
+{
+    new CultureInfo("en"),
+    new CultureInfo("tr")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("tr");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -8,6 +30,7 @@ builder.Services.AddHttpClient();
 var tenantId = builder.Configuration["Tenant:TenantId"];
 builder.Services.AddSingleton(new TenantConfig { TenantId = tenantId });
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -22,7 +45,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseRequestLocalization(); 
 app.UseAuthorization();
 
 app.MapControllerRoute(

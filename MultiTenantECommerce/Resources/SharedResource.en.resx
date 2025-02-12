@@ -120,19 +120,32 @@
   <data name="Blog" xml:space="preserve">
     <value>Blog</value>
   </data>
-  <data name="ContactUs" xml:space="preserve">
-    <value>Contact Us</value>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
   </data>
-  <data name="MyAccount" xml:space="preserve">
-    <value> My Account</value>
+  <data name="DailyDeals" xml:space="preserve">
+    <value>Daily Deals</value>
   </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
+  <data name="Elements" xml:space="preserve">
+    <value>Elements</value>
   </data>
-  <data name="SignIn" xml:space="preserve">
-    <value> Sign In</value>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="Shop" xml:space="preserve">
+    <value>Shop
+</value>
+  </data>
+  <data name="TrackOrder" xml:space="preserve">
+    <value>TrackOrder</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Vendor</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
-    <value>Welcome to Luv Ceramic Art Store!</value>
+    <value> Welcome to Luv Ceramic Art Store!</value>
   </data>
 </root>

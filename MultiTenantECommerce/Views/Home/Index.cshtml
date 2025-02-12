@@ -1,6 +1,11 @@
 ﻿@{
     Layout = "_Layout";
 }
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizerFactory LocalizerFactory
+@{
+    var Localizer = LocalizerFactory.Create("SharedResource", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+}
 
 <div class="page-wrapper">
     <h1 class="d-none">Wolmart - Responsive Marketplace HTML Template</h1>
@@ -1697,16 +1702,16 @@
                     <a href="#main-menu" class="nav-link active">Main Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#categories" class="nav-link">Categories</a>
+                    <a href="#categories" class="nav-link">@Localizer["Categories"]</a>
                 </li>
             </ul>
         </div>
         <div class="tab-content">
             <div class="tab-pane active" id="main-menu">
                 <ul class="mobile-menu">
-                    <li><a href="demo10.html">Home</a></li>
+                    <li><a href="demo10.html">@Localizer["Home"]</a></li>
                     <li>
-                        <a href="shop-banner-sidebar.html">Shop</a>
+                        <a href="shop-banner-sidebar.html">@Localizer["Shop"]</a>
                         <ul>
                             <li>
                                 <a href="#">Shop Pages</a>
@@ -1781,7 +1786,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="vendor-dokan-store.html">Vendor</a>
+                        <a href="vendor-dokan-store.html">@Localizer["Vendor"]</a>
                         <ul>
                             <li>
                                 <a href="#">Store Listing</a>
@@ -1804,7 +1809,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="blog.html">Blog</a>
+                        <a href="blog.html">@Localizer["Blog"]</a>
                         <ul>
                             <li><a href="blog.html">Classic</a></li>
                             <li><a href="blog-listing.html">Listing</a></li>
@@ -1839,7 +1844,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="about-us.html">Pages</a>
+                        <a href="about-us.html">@Localizer["Pages"]</a>
                         <ul>
 
                             <li><a href="about-us.html">About Us</a></li>
@@ -1856,7 +1861,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="elements.html">Elements</a>
+                        <a href="elements.html">@Localizer["Elements"]</a>
                         <ul>
                             <li><a href="element-products.html">Products</a></li>
                             <li><a href="element-titles.html">Titles</a></li>
