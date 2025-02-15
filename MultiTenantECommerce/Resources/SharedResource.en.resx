@@ -120,8 +120,17 @@
   <data name="Blog" xml:space="preserve">
     <value>Blog</value>
   </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Categories</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact Us</value>
   </data>
   <data name="DailyDeals" xml:space="preserve">
     <value>Daily Deals</value>
@@ -129,15 +138,54 @@
   <data name="Elements" xml:space="preserve">
     <value>Elements</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot Password ?</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="IAgreeTo" xml:space="preserve">
+    <value>I agree to the</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>My Account</value>
   </data>
   <data name="Pages" xml:space="preserve">
     <value>Pages</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="PrivacyPolicyMessage" xml:space="preserve">
+    <value>Your personal data will be used to support your experience throughout this website, to manage access to your account,  and for other purposes described in our</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="Shop" xml:space="preserve">
     <value>Shop
 </value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="SignInWithSocial" xml:space="preserve">
+    <value>Sign in with social account</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>SignUp</value>
   </data>
   <data name="TrackOrder" xml:space="preserve">
     <value>TrackOrder</value>
@@ -147,5 +195,8 @@
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
     <value> Welcome to Luv Ceramic Art Store!</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>Wishlist</value>
   </data>
 </root>

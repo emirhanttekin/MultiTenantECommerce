@@ -120,8 +120,17 @@
   <data name="Blog" xml:space="preserve">
     <value>Blog</value>
   </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Sepet</value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Kategoriler</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Çıkış Yap</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Bize Ulaşın</value>
   </data>
   <data name="DailyDeals" xml:space="preserve">
     <value>Günlük Fırsatlar</value>
@@ -129,14 +138,54 @@
   <data name="Elements" xml:space="preserve">
     <value>Öğeler</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-Posta</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Parolanızı mı unuttunuz ?</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value> Ana Sayfa</value>
+  </data>
+  <data name="IAgreeTo" xml:space="preserve">
+    <value>Katılıyorum</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>Hesabım</value>
   </data>
   <data name="Pages" xml:space="preserve">
     <value>Sayfalar</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Gizlilik Politikası</value>
+  </data>
+  <data name="PrivacyPolicyMessage" xml:space="preserve">
+    <value>Kişisel verileriniz deneyiminizi desteklemek için kullanılacaktır. 
+ Bu web sitesinde hesabınıza erişimi yönetmek için,  ve belgemizde açıklanan diğer amaçlar için</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Kayıt Ol</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Beni Hatırla</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Aramak</value>
+  </data>
   <data name="Shop" xml:space="preserve">
     <value>Mağaza</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="SignInWithSocial" xml:space="preserve">
+    <value>Sosyal hesapla oturum açın</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Kayıt Ol</value>
   </data>
   <data name="TrackOrder" xml:space="preserve">
     <value> Sipariş Takibi</value>
@@ -146,5 +195,8 @@
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Luv Ceramic Art Mağazasına Hoş Geldiniz!</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>Favoriler</value>
   </data>
 </root>
