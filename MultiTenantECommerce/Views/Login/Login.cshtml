@@ -4,7 +4,6 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizerFactory LocalizerFactory
 @{
-
     var Localizer = LocalizerFactory.Create("SharedResource", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
 }
 
@@ -19,40 +18,51 @@
             </li>
         </ul>
         <div class="tab-content">
+            <!-- GİRİŞ YAPMA FORMU -->
             <div class="tab-pane active" id="sign-in">
-                <div class="form-group">
-                    <label>@Localizer["Email"] *</label>
-                    <input type="text" class="form-control" name="username" id="username" required>
-                </div>
-                <div class="form-group mb-0">
-                    <label>@Localizer["Password"] *</label>
-                    <input type="password" class="form-control" name="password" id="password" required>
-                </div>
-                <div class="form-checkbox d-flex align-items-center justify-content-between">
-                    <input type="checkbox" class="custom-checkbox" id="remember" name="remember">
-                    <label for="remember">@Localizer["RememberMe"]</label>
-                    <a href="#">@Localizer["ForgotPassword"]</a>
-                </div>
-                <a href="#" class="btn btn-primary">@Localizer["SignIn"]</a>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>@Localizer["Email"] *</label>
+                        <input type="email" class="form-control" name="email" id="login-email" required>
+                    </div>
+                    <div class="form-group mb-0">
+                        <label>@Localizer["Password"] *</label>
+                        <input type="password" class="form-control" name="password" id="login-password" required>
+                    </div>
+                    <div class="form-checkbox d-flex align-items-center justify-content-between">
+                        <input type="checkbox" class="custom-checkbox" id="remember" name="remember">
+                        <label for="remember">@Localizer["RememberMe"]</label>
+                        <a href="#">@Localizer["ForgotPassword"]</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">@Localizer["SignIn"]</button>
+                </form>
             </div>
+
+            <!-- KAYIT OLMA FORMU -->
             <div class="tab-pane" id="sign-up">
-                <div class="form-group">
-                    <label>@Localizer["Email"] *</label>
-                    <input type="text" class="form-control" name="email_1" id="email_1" required>
-                </div>
-                <div class="form-group mb-5">
-                    <label>@Localizer["Password"] *</label>
-                    <input type="password" class="form-control" name="password_1" id="password_1" required>
-                </div>
-                <p>@Localizer["PrivacyPolicyMessage"] <a href="#" class="text-primary">@Localizer["PrivacyPolicy"]</a>.</p>
-      
-                <div class="form-checkbox d-flex align-items-center justify-content-between mb-5">
-                    <input type="checkbox" class="custom-checkbox" id="agree" name="agree">
-                    <label for="agree">@Localizer["IAgreeTo"] <a href="#" class="text-primary">@Localizer["PrivacyPolicy"]</a></label>
-                </div>
-                <a href="#" class="btn btn-primary">@Localizer["SignUp"]</a>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label>@Localizer["Name"] *</label>
+                        <input type="text" class="form-control" name="name" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>@Localizer["Email"] *</label>
+                        <input type="email" class="form-control" name="email" id="register-email" required>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label>@Localizer["Password"] *</label>
+                        <input type="password" class="form-control" name="password" id="register-password" required>
+                    </div>
+                    <p>@Localizer["PrivacyPolicyMessage"] <a href="#" class="text-primary">@Localizer["PrivacyPolicy"]</a>.</p>
+                    <div class="form-checkbox d-flex align-items-center justify-content-between mb-5">
+                        <input type="checkbox" class="custom-checkbox" id="agree" name="agree" required>
+                        <label for="agree">@Localizer["IAgreeTo"] <a href="#" class="text-primary">@Localizer["PrivacyPolicy"]</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">@Localizer["SignUp"]</button>
+                </form>
             </div>
         </div>
+
         <p class="text-center">@Localizer["SignInWithSocial"]</p>
         <div class="social-icons social-icon-border-color d-flex justify-content-center">
             <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
@@ -60,5 +70,73 @@
             <a href="#" class="social-icon social-google fab fa-google"></a>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // Kullanıcı Kayıt Ol
+            $("#registerForm").submit(function (e) {
+                e.preventDefault(); // Sayfanın yeniden yüklenmesini önler
+
+                var registerData = {
+                    name: $("#register-name").val(),
+                    email: $("#register-email").val(),
+                    password: $("#register-password").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Login/Register",
+                    contentType: "application/x-www-form-urlencoded",
+                    data: registerData,
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            $("#sign-in").addClass("active"); // Login sekmesine geçiş
+                            $("#sign-up").removeClass("active");
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("Kayıt işlemi sırasında hata oluştu!");
+                    }
+                });
+            });
+
+            // Kullanıcı Giriş Yap
+                  $("#loginForm").submit(function (e) {
+                e.preventDefault();
+
+                var loginData = {
+                    email: $("#login-email").val(),
+                    password: $("#login-password").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Login/SignIn",
+                    contentType: "application/x-www-form-urlencoded",
+                    data: loginData,
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            window.location.href = "/"; // Giriş başarılıysa yönlendir
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("Giriş işlemi sırasında hata oluştu!");
+                    }
+                });
+            });
+
+        });
+
+       
+    </script>
+
 </div>
 

@@ -32,12 +32,18 @@ namespace MultiTenantECommerce.API.Controllers
              return Ok(user);
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> GetUserByEmail(string email)
+        public async Task<IActionResult> GetUserByEmail(string email, string password)
         {
-            var user = await _userService.GetUserByEmailAsync(email);
-            if(user == null) return NotFound(); 
-            return Ok(user);
+            var user = await _userService.GetUserByEmailAsync(email, password);
+
+            if (user == null)
+                return Unauthorized(new { success = false, message = "E-posta veya şifre hatalı!" });
+
+            return Ok(new { success = true, message = "Giriş başarılı!", user });
         }
+
+
     }
 }

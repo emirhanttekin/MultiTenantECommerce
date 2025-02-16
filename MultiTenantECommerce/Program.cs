@@ -9,6 +9,14 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 
 // **View Localization Servisini Aktif Et**
 builder.Services.AddMvc().AddViewLocalization();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // **30 dakika boyunca oturumu aktif tut**
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 
 var supportedCultures = new[]
 {
@@ -25,7 +33,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 builder.Services.AddHttpClient();
 var tenantId = builder.Configuration["Tenant:TenantId"];
 builder.Services.AddSingleton(new TenantConfig { TenantId = tenantId });
@@ -40,6 +50,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

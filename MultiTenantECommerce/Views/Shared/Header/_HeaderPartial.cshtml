@@ -4,6 +4,10 @@
     var Localizer = LocalizerFactory.Create("SharedResource", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
 }
 
+@{
+    var userName = Context.Session.GetString("UserName");
+}
+
 <header class="header has-center">
     <div class="header-top">
         <div class="container">
@@ -45,15 +49,42 @@
                 <span class="divider d-lg-show"></span>
                 <a href="blog.html" class="d-lg-show">@Localizer["Blog"]</a>
                 <a href="contact-us.html" class="d-lg-show">@Localizer["Contact"]</a>
-                <a href="my-account.html" class="d-lg-show">@Localizer["MyAccount"]</a>
-                <a href="/Login/Login" class="d-lg-show login sign-in">
-                    <i class="w-icon-account"></i>@Localizer["SignIn"]
-                </a>
-                <span class="delimiter d-lg-show">/</span>
-                <a href="~/ajax/login.html" class="ml-0 d-lg-show login register">@Localizer["Register"]</a>
+                <a href="/Account/Account" class="d-lg-show">@Localizer["MyAccount"]</a>
+                @if (!string.IsNullOrEmpty(userName))
+                {
+                    <a href="#" class="d-lg-show login sign-in">
+                        <i class="w-icon-account"></i> @userName
+                    </a>
+                    <span class="delimiter d-lg-show">/</span>
+                    <a href="javascript:void(0);" onclick="logoutUser()" class="ml-0 d-lg-show login register">Çıkış Yap</a>
+                }
+                else
+                {
+                    <a href="/Login/Login" class="d-lg-show login sign-in">
+                        <i class="w-icon-account"></i>@Localizer["SignIn"]
+                    </a>
+                    <span class="delimiter d-lg-show">/</span>
+                    <a href="#" class="ml-0 d-lg-show login register" data-toggle="modal" data-target="#registerModal">@Localizer["Register"]</a>
+                }
+
             </div>
+
         </div>
     </div>
+    <script>
+        function logoutUser() {
+            $.ajax({
+                url: "/Login/Logout",
+                type: "POST",
+                success: function () {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("Çıkış işlemi başarısız oldu.");
+                }
+            });
+        }
+    </script>
     <!-- End of Header Top -->
 
     <div class="header-middle">

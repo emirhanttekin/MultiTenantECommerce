@@ -46,21 +46,27 @@ namespace MultiTenantECommerce.Application.Services
             };
         }
 
-        public async Task<UserResponseDto> GetUserByEmailAsync(string email)
+        public async Task<UserResponseDto> GetUserByEmailAsync(string email, string password)
         {
             var user = await _userRepository.GetByEmailAsync(email);
             if (user == null) return null;
+
+            // Kullanıcının girdiği şifreyi hashleyip doğrula
+            if (!VerifyPassword(password, user.PasswordHash))
+            {
+                return null; // Şifre yanlış
+            }
+
             return new UserResponseDto
             {
                 Id = user.Id,
                 TenantID = user.TenantID,
                 FullName = user.FullName,
                 Email = user.Email,
-                Role = user.Role,
-
+                Role = user.Role
             };
-
         }
+
 
         public async Task<UserResponseDto> GetUserByIdASync(Guid userId)
         {
@@ -90,5 +96,13 @@ namespace MultiTenantECommerce.Application.Services
 
             }
         }
+
+
+        public bool VerifyPassword(string enteredPassword, string storedHash)
+        {
+            var enteredPasswordHash = HashPassword(enteredPassword);
+            return enteredPasswordHash.Equals(storedHash, StringComparison.OrdinalIgnoreCase);
+        }
+
     }
 }

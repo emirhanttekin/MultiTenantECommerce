@@ -6,6 +6,6 @@ namespace MultiTenantECommerce.Application.Interfaces.Services
     {
         Task<UserResponseDto> CreateUserAsync(Guid tenantId, UserDto userDto);
         Task<UserResponseDto> GetUserByIdASync(Guid userId);
-        Task<UserResponseDto> GetUserByEmailAsync(string email);
+        Task<UserResponseDto> GetUserByEmailAsync(string email, string password);
     }
 }
